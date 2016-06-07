@@ -10,8 +10,6 @@ COMMENT_CHARS = b'#:'
 drawing = Drawing(400, 200)
 data = []
 for line in urlopen(URL).readlines():
-    #line = str(line1)
-    #print(line)
     if not line.isspace() and not line[0] in COMMENT_CHARS:
         data.append([float(n) for n in line.split()])
         
