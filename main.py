@@ -1,4 +1,4 @@
-from urllib.request import urlopen
+from urllib import urlopen
 from reportlab.graphics.shapes import *
 from reportlab.graphics.charts.lineplots import LinePlot
 from reportlab.graphics.charts.textlabels import Label
@@ -39,32 +39,19 @@ lp.lines[2].symbol = makeMarker('FilledCircle', size=3)
 lp.lines[2].name = 'Low'
 
 drawing.add(Circle(320, 190, 3, fillColor=colors.blue))
-lab = Label()
-lab.setOrigin(350,190)
-lab.boxAnchor = 'ne'
-lab.dx = 5
-lab.dy = 7
-lab.setText(lp.lines[0].name)
-drawing.add(lab)
-
 drawing.add(Circle(320, 180, 3, fillColor=colors.red))
-lab = Label()
-lab.setOrigin(350,180)
-lab.boxAnchor = 'ne'
-lab.dx = 5
-lab.dy = 7
-lab.setText(lp.lines[1].name)
-drawing.add(lab)
-
 drawing.add(Circle(320, 170, 3, fillColor=colors.green))
-lab = Label()
-lab.setOrigin(350,170)
-lab.boxAnchor = 'ne'
-lab.dx = 5
-lab.dy = 7
-lab.setText(lp.lines[2].name)
-drawing.add(lab)
 
+labs = [Label(), Label(), Label()]
+i = 0
+for lab in labs:
+    lab.setOrigin(350, 190-i*10)
+    lab.boxAnchor = 'ne'
+    lab.dx = 5
+    lab.dy = 7
+    lab.setText(lp.lines[i].name)
+    drawing.add(lab)
+    i+=1
 
 drawing.add(lp)
 drawing.add(String(200, 25, 'Sunspots', fontsize = 14, fillcolr = colors.red))
